@@ -62,8 +62,8 @@
 	WHERE Login='zbigniewduda';
 	
 /* 12. Wyswietlenie danych zalgownego uzytkownika nowakanna. */
-	SELECT Login,Mail,Data_utworzenia_konta F
-	ROM uzytkownik 
+	SELECT Login,Mail,Data_utworzenia_konta 
+	FROM uzytkownik 
 	WHERE Login='nowakanna';
 	
 /* 13.  Uzytkownik ma mozliwosc zarejestrowania sie. */
