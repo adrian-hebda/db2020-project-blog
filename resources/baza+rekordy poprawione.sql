@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 21 Maj 2020, 14:05
+-- Czas generowania: 28 Maj 2020, 12:57
 -- Wersja serwera: 10.4.11-MariaDB
 -- Wersja PHP: 7.4.5
 
@@ -28,30 +28,29 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `kategoria` (
-  `ID_kategoria` int(11) NOT NULL,
-  `Nazwa_kategorii` text NOT NULL
+  `Nazwa_kategorii` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `kategoria`
 --
 
-INSERT INTO `kategoria` (`ID_kategoria`, `Nazwa_kategorii`) VALUES
-(1, 'moda'),
-(2, 'uroda'),
-(3, 'natura'),
-(4, 'kulinaria'),
-(5, 'dom'),
-(6, 'DIY'),
-(7, 'sport'),
-(8, 'zdrowie'),
-(9, 'praca'),
-(10, 'rodzina'),
-(11, 'podroze'),
-(12, 'ksiazki'),
-(13, 'filmy'),
-(14, 'nauka'),
-(15, 'inne');
+INSERT INTO `kategoria` (`Nazwa_kategorii`) VALUES
+('DIY'),
+('Dom'),
+('Filmy'),
+('Inne'),
+('Ksiazki'),
+('Kulinaria'),
+('Moda'),
+('Natura'),
+('Nauka'),
+('Podroze'),
+('Praca'),
+('Rodzina'),
+('Sport'),
+('Uroda'),
+('Zdrowie');
 
 -- --------------------------------------------------------
 
@@ -70,11 +69,12 @@ CREATE TABLE `kategoria_postu` (
 --
 
 INSERT INTO `kategoria_postu` (`ID_kategoria_postu`, `PostID_post`, `PodkategoriaID_podkategoria`) VALUES
-(1, 1, 62),
-(2, 2, 2),
-(3, 3, 39),
-(4, 4, 27),
-(5, 5, 10);
+(7, 6, 130),
+(6, 7, 181),
+(8, 8, 197),
+(9, 9, 169),
+(10, 10, 171),
+(11, 11, 171);
 
 -- --------------------------------------------------------
 
@@ -87,18 +87,25 @@ CREATE TABLE `komentarz` (
   `Data_dodania` date NOT NULL,
   `Tresc_komentarza` text NOT NULL,
   `PostID_post` int(11) NOT NULL,
-  `UzytkownikID_uzytkownik` int(11) NOT NULL
+  `Autor_komentarza` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `komentarz`
 --
 
-INSERT INTO `komentarz` (`ID_komentarz`, `Data_dodania`, `Tresc_komentarza`, `PostID_post`, `UzytkownikID_uzytkownik`) VALUES
-(1, '2020-01-07', 'Witamy serdecznie', 1, 7),
-(2, '2020-05-21', 'Swietne sukienki, tez je bardzo lubie', 2, 8),
-(3, '2020-05-20', 'XD', 4, 5),
-(4, '2020-05-21', 'Dziekuje za komentarz', 2, 6);
+INSERT INTO `komentarz` (`ID_komentarz`, `Data_dodania`, `Tresc_komentarza`, `PostID_post`, `Autor_komentarza`) VALUES
+(5, '2020-05-17', 'Wow! W takim razie bazy musza byc super!', 10, 'nowakanna'),
+(6, '2020-05-18', 'Tak, sa swietne <3', 10, 'jankowalski'),
+(7, '2020-05-18', 'Slicznie sukienki! ', 6, 'mkoperek'),
+(8, '2020-05-19', 'Musze kupic taka sukienke dla zony!', 6, 'zbigniewduda'),
+(9, '2020-05-27', 'Moj kot tez uwielbia te karme :)', 9, 'nowakanna'),
+(10, '2020-05-28', 'Moj puszek innej nie chce nawet sprobowac', 9, 'mkoperek'),
+(11, '2020-05-20', 'Tez lubie cwiczyc  domu', 8, 'jankowalski'),
+(12, '2020-05-21', 'Wszedzie dobrze, ale w domu najlepiej :)', 8, 'zbigniewduda'),
+(13, '2020-05-22', 'Swietny post, moze sam sprobuje kiedys MySQL', 11, 'zbigniewduda'),
+(14, '2020-05-22', 'Piekne miejsce! Musze sie tam wybrac', 7, 'jankowalski'),
+(15, '2020-05-23', 'Koniecznie! Niepowtarzalne przezycia.', 7, 'nowakanna');
 
 -- --------------------------------------------------------
 
@@ -109,76 +116,84 @@ INSERT INTO `komentarz` (`ID_komentarz`, `Data_dodania`, `Tresc_komentarza`, `Po
 CREATE TABLE `podkategoria` (
   `ID_podkategoria` int(11) NOT NULL,
   `Nazwa_podkategorii` text NOT NULL,
-  `KategoriaID_kategoria` int(11) NOT NULL
+  `Kategoria_glowna` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `podkategoria`
 --
 
-INSERT INTO `podkategoria` (`ID_podkategoria`, `Nazwa_podkategorii`, `KategoriaID_kategoria`) VALUES
-(1, 'wiosna', 1),
-(2, 'lato', 1),
-(3, 'jesien', 1),
-(4, 'zima', 1),
-(5, 'makijaz', 2),
-(6, 'twarz', 2),
-(7, 'wlosy', 2),
-(8, 'paznokcie', 2),
-(9, 'cialo', 2),
-(10, 'fauna', 3),
-(11, 'flora', 3),
-(12, 'obiad', 4),
-(13, 'deser', 4),
-(14, 'przekaski', 4),
-(15, 'lunch', 4),
-(16, 'napoje', 4),
-(17, 'kuchnia', 5),
-(18, 'lazienka', 5),
-(19, 'sypialnia', 5),
-(20, 'salon', 5),
-(21, 'biuro', 5),
-(22, 'ogrod', 5),
-(23, 'latwe', 6),
-(24, 'umiarkowane', 6),
-(25, 'zaawansowane', 6),
-(26, 'zimowe', 7),
-(27, 'letnie', 7),
-(28, 'aktywnosc fizyczna', 8),
-(29, 'porady zdrowotne', 8),
-(30, 'problemy zdrowotne', 8),
-(31, 'rekrutacja', 9),
-(32, 'porady i wskazowki', 9),
-(33, 'praca w zespole', 9),
-(34, 'inne', 9),
-(35, 'rodzicielstwo', 10),
-(36, 'dzieci', 10),
-(37, 'dziadkowie', 10),
-(38, 'dalsza rodzina', 10),
-(39, 'krajowe', 11),
-(40, 'Azja', 11),
-(41, 'Europa', 11),
-(42, 'Afryka', 11),
-(43, 'Ameryka Poludniowa', 11),
-(44, 'Ameryka Polnocna', 11),
-(45, 'Australia', 11),
-(46, 'Antarktyda', 11),
-(47, 'naukowe', 12),
-(48, 'romans', 12),
-(49, 'kryminal', 12),
-(50, 'fantasy', 12),
-(51, 'mlodziezowe', 12),
-(52, 'bajki', 12),
-(53, 'psychologiczne', 12),
-(54, 'si-fi', 13),
-(55, 'horror', 13),
-(56, 'dokumentalne', 13),
-(57, 'seriale', 13),
-(58, 'komedie', 13),
-(59, 'inne', 13),
-(60, 'nauki humanistyczne', 14),
-(61, 'nauki scisle', 14),
-(62, 'ogolne', 15);
+INSERT INTO `podkategoria` (`ID_podkategoria`, `Nazwa_podkategorii`, `Kategoria_glowna`) VALUES
+(129, 'Wiosna', 'Moda'),
+(130, 'Lato', 'Moda'),
+(131, 'Jesien', 'Moda'),
+(132, 'Zima', 'Moda'),
+(133, 'Latwe', 'DIY'),
+(134, 'Średnie', 'DIY'),
+(135, 'Trudne', 'DIY'),
+(136, 'Ogrod', 'Dom'),
+(137, 'Biuro', 'Dom'),
+(138, 'Salon', 'Dom'),
+(139, 'Sypialnia', 'Dom'),
+(140, 'Lazienka', 'Dom'),
+(141, 'Kuchnia', 'Dom'),
+(142, 'Komedia', 'Filmy'),
+(143, 'Dramat', 'Filmy'),
+(144, 'Thriller', 'Filmy'),
+(145, 'Fanatsy', 'Filmy'),
+(146, 'Kryminal', 'Filmy'),
+(147, 'Science fiction', 'Filmy'),
+(148, 'Dokument', 'Filmy'),
+(149, 'Reportaz', 'Filmy'),
+(150, 'Horror', 'Filmy'),
+(151, 'Bajka', 'Filmy'),
+(152, 'Ogolne', 'Inne'),
+(153, 'Basnie', 'Ksiazki'),
+(154, 'Poradniki', 'Ksiazki'),
+(155, 'Psychologiczne', 'Ksiazki'),
+(156, 'Obyczajowe', 'Ksiazki'),
+(157, 'Kryminalne', 'Ksiazki'),
+(158, 'Romans', 'Ksiazki'),
+(159, 'Sensacja', 'Ksiazki'),
+(160, 'Fantastyczne', 'Ksiazki'),
+(161, 'Horror', 'Ksiazki'),
+(162, 'Mlodziezowe', 'Ksiazki'),
+(163, 'Sniadanie', 'Kulinaria'),
+(164, 'Obiad', 'Kulinaria'),
+(165, 'Kolacja', 'Kulinaria'),
+(166, 'Deser', 'Kulinaria'),
+(167, 'Przekaski', 'Kulinaria'),
+(168, 'Napoje', 'Kulinaria'),
+(169, 'Fauna', 'Natura'),
+(170, 'Flora', 'Natura'),
+(171, 'Nauki scisle', 'Nauka'),
+(172, 'Nauki humanistyczne', 'Nauka'),
+(173, 'Azja', 'Podroze'),
+(174, 'Europa', 'Podroze'),
+(175, 'Afryka', 'Podroze'),
+(176, 'Australia', 'Podroze'),
+(177, 'Ameryka Polnocna', 'Podroze'),
+(178, 'Ameryka Poludniowa', 'Podroze'),
+(179, 'Antarktyda', 'Podroze'),
+(180, 'Inne', 'Podroze'),
+(181, 'Krajowe', 'Podroze'),
+(182, 'Rozmowa rekrutacyjna', 'Praca'),
+(183, 'Porady i wskazowki', 'Praca'),
+(184, 'Home office', 'Praca'),
+(185, 'Rodzicielstwo', 'Rodzina'),
+(186, 'Dzieci', 'Rodzina'),
+(187, 'Mlodziez', 'Rodzina'),
+(188, 'Zimowe', 'Sport'),
+(189, 'Letnie', 'Sport'),
+(190, 'Wlosy', 'Uroda'),
+(191, 'Paznokcie', 'Uroda'),
+(192, 'Twarz', 'Uroda'),
+(193, 'Cialo', 'Uroda'),
+(194, 'Makijaz', 'Uroda'),
+(195, 'Wskazowki i porady', 'Zdrowie'),
+(196, 'Problemy zdrowotne', 'Zdrowie'),
+(197, 'Aktywnosc fizyczna', 'Zdrowie'),
+(198, 'Seniorzy', 'Zdrowie');
 
 -- --------------------------------------------------------
 
@@ -194,19 +209,20 @@ CREATE TABLE `post` (
   `Tresc` text DEFAULT NULL,
   `Liczba_polubien` int(11) DEFAULT NULL,
   `Liczba_nielubien` int(11) DEFAULT NULL,
-  `UzytkownikID_uzytkownik` int(11) NOT NULL
+  `Autor` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `post`
 --
 
-INSERT INTO `post` (`ID_post`, `Tytul`, `Data_dodania`, `Data_ostatniej_modyfikacji`, `Tresc`, `Liczba_polubien`, `Liczba_nielubien`, `UzytkownikID_uzytkownik`) VALUES
-(1, 'Witam', '2020-01-05', '2020-01-05', 'Witam, to pierwszy post, mam nadzieje na duze zainteresowanie blogiem', 5, 1, 5),
-(2, 'MODNE SUKIENKI HISZPANKI – ZAKOCHASZ SIĘ W NICH!', '2020-05-12', '2020-05-12', 'Sukienki w stylu hiszpańskim co roku cieszą się ogromnym powodzeniem. Dziewczyny uwielbiają ten fason, a faceci wprost nie mogą oderwać oczu od kobiet ubranych w taką sukienkę. Są bardzo kobiece i pasują praktycznie na każdą okazję. Dostępne w różnych kolorach i wzorach, wykonane z różnych tkanin. To doskonała propozycja dla każdego typu sylwetki.', 8, 2, 6),
-(3, 'Objazdówka wczesnoporanna!', '2020-05-14', '2020-05-15', 'Wymyśliłam sobie,że w sobotę wstanę wcześnie i pojadę w teren.Tak też zrobiłam,zapowiadało się słonecznie,bułki i picie spakowane,aparat i lornetka wzięta to ruszyłam.Po drodze przystanki na foty ptaków i tak jako pierwsze załapały się pokląskwy.', 6, 1, 6),
-(4, 'Trening w domu w dobie koronawirusa. Joga dla początkujących', '2020-05-19', '2020-05-19', 'Tak naprawdę do sesji jogi w domowym zaciszu nie potrzebujecie drogiego, specjalistycznego sprzętu. Wystarczą chęci, niewielka, uporządkowana przestrzeń i mata do jogi, która zapewnia stabilne podłoże do wykonywania wszystkich ćwiczeń, a także amortyzuje punkty podparcia. Niezbędne mogą okazać się specjalne kostki do pozycji siedzących i leżących lub bawełniane taśmy do ćwiczeń rozciągających.', 11, 0, 7),
-(5, 'WINSTON: KOCIE KARMY W ROSSMANIE', '2020-05-05', '2020-05-07', 'Ciężko znaleźć kogoś kto nie zna drogeri kosmetycznej Rossman. Bogaty asortyment i liczne promocje przyciagają większość Polaków. W jednym miejscu kupimy produkty pielęgnacyjne, akcesoria do sprzatania i gadżety do domu. Sklep oferuje również marki własne. W Rossmanie znajdziemy także dział dla zwierzat.', 7, 3, 8);
+INSERT INTO `post` (`ID_post`, `Tytul`, `Data_dodania`, `Data_ostatniej_modyfikacji`, `Tresc`, `Liczba_polubien`, `Liczba_nielubien`, `Autor`) VALUES
+(6, 'MODNE SUKIENKI HISZPANKI – ZAKOCHASZ SIĘ W NICH!', '2020-05-16', '2020-05-16', 'Sukienki w stylu hiszpańskim co roku cieszą się ogromnym powodzeniem. Dziewczyny uwielbiają ten fason, a faceci wprost nie mogą oderwać oczu od kobiet ubranych w taką sukienkę. Są bardzo kobiece i pasują praktycznie na każdą okazję. Dostępne w różnych kolorach i wzorach, wykonane z różnych tkanin. To doskonała propozycja dla każdego typu sylwetki.', 8, 1, 'nowakanna'),
+(7, 'Objazdówka wczesnoporanna', '2020-05-22', '2020-05-24', 'Wymyśliłam sobie,że w sobotę wstanę wcześnie i pojadę w teren.Tak też zrobiłam,zapowiadało się słonecznie,bułki i picie spakowane,aparat i lornetka wzięta to ruszyłam.Po drodze przystanki na foty ptaków i tak jako pierwsze załapały się pokląskwy.', 12, 3, 'nowakanna'),
+(8, 'Trening w domu w dobie koronawirusa. Joga dla początkujących', '2020-05-18', '2020-05-19', 'Tak naprawdę do sesji jogi w domowym zaciszu nie potrzebujecie drogiego, specjalistycznego sprzętu. Wystarczą chęci, niewielka, uporządkowana przestrzeń i mata do jogi, która zapewnia stabilne podłoże do wykonywania wszystkich ćwiczeń, a także amortyzuje punkty podparcia. Niezbędne mogą okazać się specjalne kostki do pozycji siedzących i leżących lub bawełniane taśmy do ćwiczeń rozciągających.', 13, 4, 'zbigniewduda'),
+(9, 'WINSTON: KOCIE KARMY W ROSSMANIE', '2020-05-26', '2020-05-26', 'Ciężko znaleźć kogoś kto nie zna drogeri kosmetycznej Rossman. Bogaty asortyment i liczne promocje przyciagają większość Polaków. W jednym miejscu kupimy produkty pielęgnacyjne, akcesoria do sprzatania i gadżety do domu. Sklep oferuje również marki własne. W Rossmanie znajdziemy także dział dla zwierzat.', 4, 2, 'mkoperek'),
+(10, 'Dlaczego warto zostać programistą baz danych', '2020-05-11', '2020-05-17', 'Jednym z często zadawanych pytań w kontekście nauki programowania jest kierunek ich rozwoju i trendy obecnych technologii. Zanim zaczniemy się czegokolwiek uczyć i poświęcimy na to swój cenny czas, pieniądze i zaangażowanie, chcemy wiedzieć, z jakich ofert dostępnych na rynku będziemy mogli wybierać. Na tej podstawie oceniamy, czy włożony wysiłek będzie opłacalny, czy może lepiej zdecydować się na inną opcję kierowania własną karierą. W tym artykule chciałbym podważyć sens przesadnego analizowania trendów technologii oraz zwrócić uwagę na korzyści płynące z umiejętności programowania baz danych.', 15, 0, 'jankowalski'),
+(11, 'Co należy wiedzieć o MySQL? ', '2020-05-20', '2020-05-20', 'MySQL to najpopularniejsza aplikacja bazodanowa typu open source. Doskonale nadaje sie do wspolpracy z wieloma popularnymi jezykami programowania. Czesto wykorzystuje sie ja do budowania dynamicznych stron internetowych w polaczeniu z jezykami server-side (np. PHP).', 18, 2, 'jankowalski');
 
 -- --------------------------------------------------------
 
@@ -216,19 +232,22 @@ INSERT INTO `post` (`ID_post`, `Tytul`, `Data_dodania`, `Data_ostatniej_modyfika
 
 CREATE TABLE `preferencje_uzytkownika` (
   `ID_preferencje_uzytkownika` int(11) NOT NULL,
-  `UzytkownikID_uzytkownik` int(11) NOT NULL,
-  `KategoriaID_kategoria` int(11) NOT NULL
+  `Wybrana_kategoria` varchar(30) NOT NULL,
+  `Wlasciciel` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `preferencje_uzytkownika`
 --
 
-INSERT INTO `preferencje_uzytkownika` (`ID_preferencje_uzytkownika`, `UzytkownikID_uzytkownik`, `KategoriaID_kategoria`) VALUES
-(2, 1, 14),
-(3, 2, 11),
-(4, 3, 7),
-(5, 4, 3);
+INSERT INTO `preferencje_uzytkownika` (`ID_preferencje_uzytkownika`, `Wybrana_kategoria`, `Wlasciciel`) VALUES
+(5, 'Podroze', 'nowakanna'),
+(6, 'Nauka', 'jankowalski'),
+(7, 'Moda', 'nowakanna'),
+(8, 'Natura', 'mkoperek'),
+(9, 'Dom', 'mkoperek'),
+(10, 'Sport', 'zbigniewduda'),
+(11, 'Zdrowie', 'zbigniewduda');
 
 -- --------------------------------------------------------
 
@@ -237,7 +256,7 @@ INSERT INTO `preferencje_uzytkownika` (`ID_preferencje_uzytkownika`, `Uzytkownik
 --
 
 CREATE TABLE `profil` (
-  `ID_Profil` int(11) NOT NULL,
+  `Login` varchar(20) NOT NULL UNIQUE,
   `Zainteresowania` text DEFAULT NULL,
   `Cele` text DEFAULT NULL,
   `Plec` text DEFAULT NULL,
@@ -252,11 +271,11 @@ CREATE TABLE `profil` (
 -- Zrzut danych tabeli `profil`
 --
 
-INSERT INTO `profil` (`ID_Profil`, `Zainteresowania`, `Cele`, `Plec`, `Opis`, `Lokalizacja`, `Urodziny`, `Imie`, `Nazwisko`) VALUES
-(5, 'Informatyka, Przyroda', 'Przezyc', 'Mezczyzna', 'Hej, z tej strony Jan Kowalski. Jestem informatykiem. ', 'Krakow', '1980-01-01', 'Jan', 'Kowalski'),
-(6, 'Podroze', 'Zwiedzic caly swiat', 'Kobieta', 'Tu Anna Nowak, chetnie porozmawiam o moich wycieczkach. ', 'Gdansk', '1991-07-18', 'Anna', 'Nowak'),
-(7, 'Sport, Zdrowie', 'Wygrac maraton', 'Mezczyzna', 'Witam na moim profilu. ', 'Warszawa', '1975-03-28', 'Zbigniew', 'Duda'),
-(8, 'Dom, Zwierzeta, a szczegolnie koty', 'Zalozyc schronisko dla kotow.', 'Kobieta', '', 'Wroclaw', '1982-11-10', 'Magdalena', 'Koperek');
+INSERT INTO `profil` (`Login`, `Zainteresowania`, `Cele`, `Plec`, `Opis`, `Lokalizacja`, `Urodziny`, `Imie`, `Nazwisko`) VALUES
+('jankowalski', 'Informatyka, Przyroda', 'Przezyc', 'Mezczyzna', 'Hej, z tej strony Jan Kowalski. Jestem informatykiem. ', 'Krakow', '1980-01-01', 'Jan', 'Kowalski'),
+('mkoperek', 'Dom, zwierzeta, a szczegolnie koty', 'Zalozyc schronisko dla kotow', 'Kobieta', 'Lubie slodkie kotki, a ty?', 'Wroclaw', '1982-11-10', 'Magdalena', 'Koperek'),
+('nowakanna', 'Podroze', 'Zwiedzic caly swiat', 'Kobieta', 'Tu Anna Nowak, chetnie porozmawiam o moich wycieczkach. ', 'Gdansk', '1991-07-18', 'Anna', 'Nowak'),
+('zbigniewduda', 'Sport, zdrowie', 'Wygrac maraton', 'Mezczyzna', 'Witam na moim profilu.', 'Warszawa', '1975-03-28', 'Zbigniew', 'Duda');
 
 -- --------------------------------------------------------
 
@@ -265,23 +284,21 @@ INSERT INTO `profil` (`ID_Profil`, `Zainteresowania`, `Cele`, `Plec`, `Opis`, `L
 --
 
 CREATE TABLE `uzytkownik` (
-  `ID_uzytkownik` int(11) NOT NULL,
-  `Data_utworzenia_konta` date NOT NULL,
+  `Login` varchar(20) NOT NULL UNIQUE,
   `Mail` text NOT NULL,
-  `Login` text NOT NULL,
   `Haslo` text NOT NULL,
-  `ProfilID_profil` int(11) NOT NULL
+  `Data_utworzenia_konta` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `uzytkownik`
 --
 
-INSERT INTO `uzytkownik` (`ID_uzytkownik`, `Data_utworzenia_konta`, `Mail`, `Login`, `Haslo`, `ProfilID_profil`) VALUES
-(5, '2020-01-30', 'jkowalski@gmail.com', 'jankowalski', 'Zaq12wsx', 5),
-(6, '2020-02-28', 'nowak_anna@gmail.com', 'nowakanna', 'Podrozniczka2137', 6),
-(7, '2020-03-15', 'zbigniewduda@wp.pl', 'zbigniewduda', 'zbigniewduda', 7),
-(8, '2020-03-26', 'koperek@interia.pl', 'mkoperek', 'Puszek123', 8);
+INSERT INTO `uzytkownik` (`Login`, `Mail`, `Haslo`, `Data_utworzenia_konta`) VALUES
+('jankowalski', 'jkowalski@gmail.com', 'Zaq12wsx', '2020-01-30'),
+('mkoperek', 'koperek@interia.pl', 'Puszek123', '2020-03-26'),
+('nowakanna', 'nowak_anna@gmail.com', 'Podrozniczka2137', '2020-02-28'),
+('zbigniewduda', 'zbigniewduda@wp.pl', 'zbigniewduda', '2020-03-15');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -291,101 +308,138 @@ INSERT INTO `uzytkownik` (`ID_uzytkownik`, `Data_utworzenia_konta`, `Mail`, `Log
 -- Indeksy dla tabeli `kategoria`
 --
 ALTER TABLE `kategoria`
-  ADD PRIMARY KEY (`ID_kategoria`);
+  ADD PRIMARY KEY (`Nazwa_kategorii`);
 
 --
 -- Indeksy dla tabeli `kategoria_postu`
 --
 ALTER TABLE `kategoria_postu`
-  ADD PRIMARY KEY (`ID_kategoria_postu`);
+  ADD PRIMARY KEY (`ID_kategoria_postu`),
+  ADD KEY `PostID_post` (`PostID_post`,`PodkategoriaID_podkategoria`),
+  ADD KEY `PodkategoriaID_podkategoria` (`PodkategoriaID_podkategoria`);
 
 --
 -- Indeksy dla tabeli `komentarz`
 --
 ALTER TABLE `komentarz`
-  ADD PRIMARY KEY (`ID_komentarz`);
+  ADD PRIMARY KEY (`ID_komentarz`),
+  ADD KEY `Autor_komentarza` (`Autor_komentarza`),
+  ADD KEY `PostID_post` (`PostID_post`);
 
 --
 -- Indeksy dla tabeli `podkategoria`
 --
 ALTER TABLE `podkategoria`
-  ADD PRIMARY KEY (`ID_podkategoria`);
+  ADD PRIMARY KEY (`ID_podkategoria`),
+  ADD KEY `Kategoria_glowna` (`Kategoria_glowna`);
 
 --
 -- Indeksy dla tabeli `post`
 --
 ALTER TABLE `post`
-  ADD PRIMARY KEY (`ID_post`);
+  ADD PRIMARY KEY (`ID_post`),
+  ADD KEY `Autor` (`Autor`);
 
 --
 -- Indeksy dla tabeli `preferencje_uzytkownika`
 --
 ALTER TABLE `preferencje_uzytkownika`
-  ADD PRIMARY KEY (`ID_preferencje_uzytkownika`);
+  ADD PRIMARY KEY (`ID_preferencje_uzytkownika`),
+  ADD KEY `Wybrana_kategoria` (`Wybrana_kategoria`),
+  ADD KEY `Wlasciciel` (`Wlasciciel`);
 
 --
 -- Indeksy dla tabeli `profil`
 --
 ALTER TABLE `profil`
-  ADD PRIMARY KEY (`ID_Profil`);
+  ADD PRIMARY KEY (`Login`);
 
 --
 -- Indeksy dla tabeli `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
-  ADD PRIMARY KEY (`ID_uzytkownik`);
+  ADD PRIMARY KEY (`Login`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT dla tabeli `kategoria`
---
-ALTER TABLE `kategoria`
-  MODIFY `ID_kategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
 -- AUTO_INCREMENT dla tabeli `kategoria_postu`
 --
 ALTER TABLE `kategoria_postu`
-  MODIFY `ID_kategoria_postu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_kategoria_postu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT dla tabeli `komentarz`
 --
 ALTER TABLE `komentarz`
-  MODIFY `ID_komentarz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_komentarz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT dla tabeli `podkategoria`
 --
 ALTER TABLE `podkategoria`
-  MODIFY `ID_podkategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `ID_podkategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
 
 --
 -- AUTO_INCREMENT dla tabeli `post`
 --
 ALTER TABLE `post`
-  MODIFY `ID_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT dla tabeli `preferencje_uzytkownika`
 --
 ALTER TABLE `preferencje_uzytkownika`
-  MODIFY `ID_preferencje_uzytkownika` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_preferencje_uzytkownika` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT dla tabeli `profil`
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `kategoria_postu`
+--
+ALTER TABLE `kategoria_postu`
+  ADD CONSTRAINT `kategoria_postu_ibfk_1` FOREIGN KEY (`PostID_post`) REFERENCES `post` (`ID_post`),
+  ADD CONSTRAINT `kategoria_postu_ibfk_2` FOREIGN KEY (`PodkategoriaID_podkategoria`) REFERENCES `podkategoria` (`ID_podkategoria`);
+
+--
+-- Ograniczenia dla tabeli `komentarz`
+--
+ALTER TABLE `komentarz`
+  ADD CONSTRAINT `komentarz_ibfk_1` FOREIGN KEY (`Autor_komentarza`) REFERENCES `uzytkownik` (`Login`),
+  ADD CONSTRAINT `komentarz_ibfk_2` FOREIGN KEY (`PostID_post`) REFERENCES `post` (`ID_post`);
+
+--
+-- Ograniczenia dla tabeli `podkategoria`
+--
+ALTER TABLE `podkategoria`
+  ADD CONSTRAINT `podkategoria_ibfk_1` FOREIGN KEY (`Kategoria_glowna`) REFERENCES `kategoria` (`Nazwa_kategorii`);
+
+--
+-- Ograniczenia dla tabeli `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`Autor`) REFERENCES `uzytkownik` (`Login`);
+
+--
+-- Ograniczenia dla tabeli `preferencje_uzytkownika`
+--
+ALTER TABLE `preferencje_uzytkownika`
+  ADD CONSTRAINT `preferencje_uzytkownika_ibfk_1` FOREIGN KEY (`Wlasciciel`) REFERENCES `profil` (`Login`),
+  ADD CONSTRAINT `preferencje_uzytkownika_ibfk_2` FOREIGN KEY (`Wybrana_kategoria`) REFERENCES `kategoria` (`Nazwa_kategorii`);
+
+--
+-- Ograniczenia dla tabeli `profil`
 --
 ALTER TABLE `profil`
-  MODIFY `ID_Profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
+  ADD CONSTRAINT `profil_ibfk_1` FOREIGN KEY (`Login`) REFERENCES `uzytkownik` (`Login`);
+  
 --
--- AUTO_INCREMENT dla tabeli `uzytkownik`
+-- Ograniczenia dla tabeli `uzytkownik`
 --
-ALTER TABLE `uzytkownik`
-  MODIFY `ID_uzytkownik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
