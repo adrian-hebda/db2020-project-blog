@@ -198,7 +198,7 @@ Snippety:
 
         return ['''INSERT INTO post(Tytul,Data_dodania,Data_ostatniej_modyfikacji,Tresc,Liczba_polubien,Liczba_nielubien,Autor)
 VALUES(\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')''' % (tytul,data,dataMod,tresc,0,0,self.login),(tytul,data,dataMod,tresc,0,0,self.login)]
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     def dodajPost(self):
         if self.log().zalogowany():
             zapytanie=self.log().napiszPost()
@@ -229,7 +229,7 @@ VALUES(\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')''' % (tytul,data,dataMo
 ``` py
     def wysywDlaCiebie(self):
         return '''SELECT ID_preferencje_uzytkownika,Wybrana_kategoria FROM preferencje_uzytkownika WHERE Wlasciciel=\'%s\'''' % self.login
-----------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
     def kategorieDlaUzytkownika(self):
         if self.log().zalogowany():
             zapytanie = self.log().wysywDlaCiebie()
