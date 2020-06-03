@@ -176,5 +176,121 @@ SELECT count(*),Nazwa_podkategorii
 ## Aplikacja
 Aplikacja napisana została w języku python uwzględniając interakcję z użytkownikiem. Posiada ona główne menu, które udostępnia podstawowe funkcjonalności wykorzystujące omówione zapytania takie jak przeglądanie katalogu postów, profili innych użytkowników, możliowość rejesteracji i logowanie. Po udanym zalogowaniu użytkownik ma dostęp do bardziej zaawansowanych funkcji w tym dodawanie komentarzy, tworzenie postów, tworzenie i edytowanie własnego profilu, czy wyświetlenie swoich danych. Dodatkowo taka osoba może wyświetlić sekcję "Wybrane dla Ciebie", w której wyświetlone zostaną preferowane katgorie. Użytkownik może wyświetlić posty należące do tych kategorii, bez konieczności przeglądania wszystkich dostępnych tematów. Niezalogowany użytkownik oprócz wyświetlenia postów wybranej podkategorii może jedynie zareagować na niego dając polubienie lub nielubienie, nie może jednak komentować postów.
 
+Snippety:
+1. Dodawanie komentarza:
+```py
+  def dodajKomentarz(self,post):
+        tresc = input('Podaj tresc komentarza : ')
+        return str('''INSERT INTO komentarz(`Data_dodania`,`Tresc_komentarza`,`PostID_post`,`Autor_komentarza`) VALUES('{}','{}','{}','{}')'''.format(datetime.date.today(),tresc,post,self.login))
+-----------------------------------------------------------------------------------------------------------------
+  zapytanie = self.log().dodajKomentarz(post[0])
+  self.kursor.execute(zapytanie)
+  self.polaczenie.commit()
+```
+
+2. Dodawnie napisanego postu:
+```py
+    def napiszPost(self):  #zwraca liste dla klasy glownej
+        tytul = input('Podaj tytul postu: ')
+        data = datetime.date.today()
+        dataMod = datetime.date.today()
+        tresc = input('Podaj tresc postu: ')
+
+        return ['''INSERT INTO post(Tytul,Data_dodania,Data_ostatniej_modyfikacji,Tresc,Liczba_polubien,Liczba_nielubien,Autor)
+VALUES(\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')''' % (tytul,data,dataMod,tresc,0,0,self.login),(tytul,data,dataMod,tresc,0,0,self.login)]
+-----------------------------------------------------------------------------------------------------
+    def dodajPost(self):
+        if self.log().zalogowany():
+            zapytanie=self.log().napiszPost()
+            self.kursor.execute(zapytanie[0])
+            self.kursor.execute('SELECT ID_post FROM post WHERE Tytul=%s AND Data_dodania= %s AND Data_ostatniej_modyfikacji=%s AND Tresc =%s AND Liczba_polubien=%s AND Liczba_nielubien=%s AND Autor=%s',zapytanie[1])
+            post = self.kursor.fetchone()[0]
+            podkategorie = self.wyswPodkategorie(None)
+            while 1:
+                a = input('Wybierz podkategorie postu: ')
+                jest = False
+                for pod in podkategorie:
+                    if pod[0] ==int(a):
+
+                        jest = True
+                if jest:
+                    self.__dolaczPodkategoriePostu(post,a)
+                    break
+                else:
+                    print('Nie ma takiej podkategorii')
+                    continue
+            print('Dodano post !')
+            self.polaczenie.commit()
+                 
+        else:
+            print('ERROR')
+```
+3. Wyswietlanie wybranych dla Ciebie:
+``` py
+    def wysywDlaCiebie(self):
+        return '''SELECT ID_preferencje_uzytkownika,Wybrana_kategoria FROM preferencje_uzytkownika WHERE Wlasciciel=\'%s\'''' % self.login
+--------------------------------------------------------------------------------------------------------------------------
+    def kategorieDlaUzytkownika(self):
+        if self.log().zalogowany():
+            zapytanie = self.log().wysywDlaCiebie()
+            self.kursor.execute(zapytanie)
+            twoje = self.kursor.fetchall()
+            print('Wybrane dla Ciebie: ')
+            for twoj in twoje:
+                print('\t{}. {}'.format(twoj[0],twoj[1]))
+            a=input('1. Wybierz kategorie q. Cofnij\n')
+            if a =='1':
+                kat = input('Podaj kategorie: ')
+                for twoj in twoje:
+                    if twoj[0]==int(kat):
+                        self.wybierzPodkategorie(twoj[1])
+            elif a=='q':
+                return
+        else:
+            print('ERROR')
+```
+4. Wygląd menu:
+    głównego:
+```py
+            podany = input('WYBIERZ:\n 1. Wyswietl Kategorie \n 2. Zaloguj \n 3. Zarejestruj \n 4. Zakoncz\n')
+            if podany == '1':
+                bd.wybierzKategorie()
+            elif podany == '2':
+                bd.logowanie()
+            elif podany == '3':
+                bd.rejestracja()
+            elif podany == '4':
+                bd.close()
+                print('Koniec')
+                break
+            else:
+                print('Zla wartosc')
+                continue
+```
+   po zalogowaniu:
+```py
+
+podany = input('''WYBIERZ:\n 1. Wyswietl Kategorie \n 2. Wyswietl Profil \n 3. Wyswietl Wszystkie posty \n 4. Wybrane dla Ciebie \n 5. Dodaj Post \n 6. Wyswietl swoje dane 
+ 7. Edytuj swoj profil \n 8. Wyloguj\n''')
+            if podany == '1':
+                bd.wybierzKategorie()
+            elif podany == '2':
+                login=input('***Podaj nazwe uzytkownika: ')
+                bd.wyswProfil(login)
+            elif podany == '3':
+                bd.pokazWszystkiePosty()
+            elif podany == '4':
+                bd.kategorieDlaUzytkownika()
+            elif podany == '5':
+                bd.dodajPost()
+            elif podany == '6':
+                bd.wyswDane()
+            elif podany == '7':
+                bd.edytujProfil()
+            elif podany == '8':
+                bd.log().wyloguj()
+
+
+```
 ## Dodatkowe uwagi
 W programie zaimplementowana została większość opisanych zapytań. Daną aplikację można w przyszłości rozbudować o większą liczbę bardziej zaawansowanych funkcjonalności wymienionych również powyżej.
