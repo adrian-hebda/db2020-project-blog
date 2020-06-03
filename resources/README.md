@@ -8,6 +8,10 @@
 ## Projekt bazy danych
 Tematem naszego projketu jest blog internetowy. Opiera się on na dodawaniu i wyświetlaniu postów, komentowaniu i reagowaniu na nie. Dodatkowo każdy zarejestrowany użytkownik może spersonalizować swój profil, który może zostać wyświetlony przez pozostałych. Wszystkie posty znjadują się w poszczególnych kategoriach, co ułatwia ich przeglądanie.
 
+Schemat bazy danych:
+
+<img src="./Blog_schemat.svg">
+
 ## Implementacja zapytań SQL
  
  1.	Przeszukiwanie postu w podkategorii fauna. Dodatkowo użytkownik życzy sobie posortować wyniki wyszukiwania po liczbie polubień. 
