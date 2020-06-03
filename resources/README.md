@@ -1,7 +1,4 @@
 # Blog
-**WAŻNE: CAŁY TEKST, KTÓRY SIĘ TUTAJ ZNAJDUJE, MA ZOSTAĆ USUNIĘTY!** Powinny zostać wyłącznie nagłówki (oznaczone znakiem #) oraz tabela z nazwiskami.
-Tutaj ma znaleźć się skrótowy opis projektu. W tabeli poniżej proszę uzupełnić swoje nazwisko i imię
-.
 
 | Nazwisko i imię | Wydział | Kierunek | Semestr | Grupa | Rok akademicki |
 | :-------------: | :-----: | :------: | :-----: | :---: | :------------: |
