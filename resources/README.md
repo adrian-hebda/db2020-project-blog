@@ -6,7 +6,7 @@
 | Fajer Julia     | WIMiIP  | IS       |   4     | 1     | 2019/2020      |
 
 ## Projekt bazy danych
-Tematem naszego projketu jest blog internetowy. Opiera się on na dodawaniu i wyświetlaniu postów, komentowaniu i reagowaniu na nie. Dodatkowo każdy zarejestrowany użytkownik może spersonalizować swój profil, który może zostać wyświetlony przez pozostałych. Wszystkie posty znjadują się w poszczególnych kategoriach, co ułatwia ich przeglądanie.
+Tematem naszego projketu jest blog internetowy. Opiera się on na dodawaniu i wyświetlaniu postów, komentowaniu i reagowaniu na nie. Dodatkowo każdy zarejestrowany użytkownik ma możliwość spersonalizowania swojego profilu, który następnie może zostać wyświetlony przez pozostałych. Wszystkie posty znjadują się w poszczególnych kategoriach, co ułatwia ich przeglądanie.
 
 Schemat bazy danych:
 
@@ -174,7 +174,7 @@ SELECT count(*),Nazwa_podkategorii
  ```
     
 ## Aplikacja
-Aplikacja napisana została w języku python uwzględniając interakcję z użytkownikiem. Posiada ona główne menu, które udostępnia podstawowe funkcjonalności wykorzystujące omówione zapytania takie jak przeglądanie katalogu postów, profili innych użytkowników, możliowość rejesteracji i logowanie. Po udanym zalogowaniu użytkownik ma dostęp do bardziej zaawansowanych funkcji w tym dodawanie komentarzy, tworzenie postów, tworzenie i edytowanie własnego profilu, czy wyświetlenie swoich danych. Dodatkowo taka osoba może wyświetlić sekcję "Wybrane dla Ciebie", w której wyświetlone zostaną preferowane katgorie. Użytkownik może wyświetlić posty należące do tych kategorii, bez konieczności przeglądania wszystkich dostępnych tematów. Niezalogowany użytkownik oprócz wyświetlenia postów wybranej podkategorii może jedynie zareagować na niego dając polubienie lub nielubienie, nie może jednak komentować postów.
+Aplikacja napisana została w języku python uwzględniając interakcję z użytkownikiem. Posiada ona główne menu, które udostępnia podstawowe funkcjonalności wykorzystujące omówione zapytania, takie jak przeglądanie katalogu postów, profili innych użytkowników, możliowość rejesteracji i logowanie. Po udanym zalogowaniu, użytkownik ma dostęp do bardziej zaawansowanych funkcji, w tym dodawanie komentarzy, tworzenie postów, tworzenie i edytowanie własnego profilu, czy wyświetlenie swoich danych. Dodatkowo taka osoba może wyświetlić sekcję "Wybrane dla Ciebie", w której wyświetlone zostaną preferowane kategorie. Użytkownik może wyświetlić posty należące do tych kategorii, bez konieczności przeglądania wszystkich dostępnych tematów. Niezalogowany użytkownik, oprócz wyświetlenia postów wybranej podkategorii, może jedynie zareagować na niego dając polubienie lub nielubienie, nie może jednak komentować postów.
 
 Obsługa aplikacji odbywa się z poziomu terminala. Użytkownik dokonuje odpowiednich wyborów wciskając na klawiaturze określone cyfry/litery wywołujące żądane operacje.
 
