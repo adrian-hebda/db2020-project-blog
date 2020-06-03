@@ -6,7 +6,7 @@
 | Fajer Julia     | WIMiIP  | IS       |   4     | 1     | 2019/2020      |
 
 ## Projekt bazy danych
-Tutaj ma znaleźć się opis projektu bazy danych. Na wstępie proszę zagnieździć obraz schematu w formie wektorowej, najlepiej plik SVG. Dodatkowo, w tej sekcji należy zawrzeć kilka przykładowych zapytań tworzących (lub w razie konieczności, modyfikujących) tabelę, tj. grupa DDL.
+Tematem naszego projketu jest blog internetowy. Opiera się on na dodawaniu i wyświetlaniu postów, komentowaniu i reagowaniu na nie. Dodatkowo każdy zarejestrowany użytkownik może spersonalizować swój profil, który może zostać wyświetlony przez pozostałych. Wszystkie posty znjadują się w poszczególnych kategoriach, co ułatwia ich przeglądanie.
 
 ## Implementacja zapytań SQL
  
