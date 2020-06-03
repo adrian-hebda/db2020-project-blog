@@ -176,6 +176,8 @@ SELECT count(*),Nazwa_podkategorii
 ## Aplikacja
 Aplikacja napisana została w języku python uwzględniając interakcję z użytkownikiem. Posiada ona główne menu, które udostępnia podstawowe funkcjonalności wykorzystujące omówione zapytania takie jak przeglądanie katalogu postów, profili innych użytkowników, możliowość rejesteracji i logowanie. Po udanym zalogowaniu użytkownik ma dostęp do bardziej zaawansowanych funkcji w tym dodawanie komentarzy, tworzenie postów, tworzenie i edytowanie własnego profilu, czy wyświetlenie swoich danych. Dodatkowo taka osoba może wyświetlić sekcję "Wybrane dla Ciebie", w której wyświetlone zostaną preferowane katgorie. Użytkownik może wyświetlić posty należące do tych kategorii, bez konieczności przeglądania wszystkich dostępnych tematów. Niezalogowany użytkownik oprócz wyświetlenia postów wybranej podkategorii może jedynie zareagować na niego dając polubienie lub nielubienie, nie może jednak komentować postów.
 
+Obsługa aplikacji odbywa się z poziomu terminala. Użytkownik dokonuje odpowiednich wyborów wciskając na klawiaturze określone cyfry/litery wywołujące żądane operacje.
+
 Snippety:
 1. Dodawanie komentarza:
 ```py
