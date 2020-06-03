@@ -182,7 +182,7 @@ Snippety:
   def dodajKomentarz(self,post):
         tresc = input('Podaj tresc komentarza : ')
         return str('''INSERT INTO komentarz(`Data_dodania`,`Tresc_komentarza`,`PostID_post`,`Autor_komentarza`) VALUES('{}','{}','{}','{}')'''.format(datetime.date.today(),tresc,post,self.login))
------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   zapytanie = self.log().dodajKomentarz(post[0])
   self.kursor.execute(zapytanie)
   self.polaczenie.commit()
@@ -198,7 +198,7 @@ Snippety:
 
         return ['''INSERT INTO post(Tytul,Data_dodania,Data_ostatniej_modyfikacji,Tresc,Liczba_polubien,Liczba_nielubien,Autor)
 VALUES(\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')''' % (tytul,data,dataMod,tresc,0,0,self.login),(tytul,data,dataMod,tresc,0,0,self.login)]
------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     def dodajPost(self):
         if self.log().zalogowany():
             zapytanie=self.log().napiszPost()
@@ -229,7 +229,7 @@ VALUES(\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')''' % (tytul,data,dataMo
 ``` py
     def wysywDlaCiebie(self):
         return '''SELECT ID_preferencje_uzytkownika,Wybrana_kategoria FROM preferencje_uzytkownika WHERE Wlasciciel=\'%s\'''' % self.login
---------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
     def kategorieDlaUzytkownika(self):
         if self.log().zalogowany():
             zapytanie = self.log().wysywDlaCiebie()
@@ -250,6 +250,7 @@ VALUES(\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')''' % (tytul,data,dataMo
             print('ERROR')
 ```
 4. Wygląd menu:
+
     głównego:
 ```py
             podany = input('WYBIERZ:\n 1. Wyswietl Kategorie \n 2. Zaloguj \n 3. Zarejestruj \n 4. Zakoncz\n')
