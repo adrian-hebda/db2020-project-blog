@@ -6,7 +6,7 @@
 | Fajer Julia     | WIMiIP  | IS       |   4     | 1     | 2019/2020      |
 
 ## Projekt bazy danych
-Tematem naszego projketu jest blog internetowy. Opiera się on na dodawaniu i wyświetlaniu postów, komentowaniu i reagowaniu na nie. Dodatkowo każdy zarejestrowany użytkownik ma możliwość spersonalizowania swojego profilu, który następnie może zostać wyświetlony przez pozostałych. Wszystkie posty znjadują się w poszczególnych kategoriach, co ułatwia ich przeglądanie.
+Tematem naszego projektu jest blog internetowy. Opiera się on na dodawaniu i wyświetlaniu postów, komentowaniu i reagowaniu na nie. Dodatkowo każdy zarejestrowany użytkownik ma możliwość spersonalizowania swojego profilu, który następnie może zostać wyświetlony przez pozostałych. Wszystkie posty znjadują się w poszczególnych kategoriach, co ułatwia ich przeglądanie.
 
 Schemat bazy danych:
 
