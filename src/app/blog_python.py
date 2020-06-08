@@ -3,13 +3,6 @@ import pymysql
 import getpass
 import datetime
 
-class bazaDanych():
-    def __init__(self, host, uzytkownik, haslo, baza):
-        self.polaczenie = pymysql.connect(host, uzytkownik, haslo, baza)
-        self.kursor = self.polaczenie.cursor()import os
-import pymysql 
-import getpass
-import datetime
 
 class Log():
     def __init__(self):
